@@ -255,6 +255,9 @@ class DropdownSearch<T> extends StatefulWidget {
   /// props for selection list view
   final SelectionListViewProps selectionListViewProps;
 
+  /// forces menu to stick to the input decoration border
+  final bool stickMenuToBorder;
+
   DropdownSearch({
     Key? key,
     this.onSaved,
@@ -388,6 +391,7 @@ class DropdownSearch<T> extends StatefulWidget {
     this.popupValidationMultiSelectionWidget,
     this.popupElevation = 8,
     this.selectionListViewProps = const SelectionListViewProps(),
+    this.stickMenuToBorder = false,
   })  : assert(!showSelectedItems || T == String || compareFn != null),
         this.searchFieldProps = searchFieldProps ?? TextFieldProps(),
         this.onChangedMultiSelection = onChange,
@@ -722,19 +726,46 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
         });
   }
 
+  RenderBox? findBorderBox(RenderBox box) {
+    RenderBox? borderBox;
+
+    box.visitChildren((child) {
+      if (child is RenderCustomPaint) {
+        borderBox = child;
+      }
+
+      final box = findBorderBox(child as RenderBox);
+      if (box != null) {
+        borderBox = box;
+      }
+    });
+
+    return borderBox;
+  }
+
   ///openMenu
   Future _openMenu() {
     // Here we get the render object of our physical button, later to get its size & position
     final RenderBox popupButtonObject = context.findRenderObject() as RenderBox;
+
+    final decorationBox = findBorderBox(popupButtonObject);
+
+    double translateOffset = 0;
+    if (widget.stickMenuToBorder && decorationBox != null) {
+      translateOffset =
+          decorationBox.size.height - popupButtonObject.size.height;
+    }
+
     // Get the render object of the overlay used in `Navigator` / `MaterialApp`, i.e. screen size reference
     final RenderBox overlay =
         Overlay.of(context)!.context.findRenderObject() as RenderBox;
     // Calculate the show-up area for the dropdown using button's size & position based on the `overlay` used as the coordinate space.
     final RelativeRect position = RelativeRect.fromSize(
       Rect.fromPoints(
-        popupButtonObject.localToGlobal(
-            popupButtonObject.size.bottomLeft(Offset.zero),
-            ancestor: overlay),
+        popupButtonObject
+            .localToGlobal(popupButtonObject.size.bottomLeft(Offset.zero),
+                ancestor: overlay)
+            .translate(0, translateOffset),
         popupButtonObject.localToGlobal(
             popupButtonObject.size.bottomRight(Offset.zero),
             ancestor: overlay),
