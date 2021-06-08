@@ -8,6 +8,12 @@
 
         - showSelectedItem replaced by showSelectedItems
 
+## [0.6.6]
+* more features
+
+## [0.6.5]
+* temp release
+
 ## [0.6.3] - 2021.06.03
 * fix analyser issues
 

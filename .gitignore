@@ -30,6 +30,8 @@ pubspec.lock
 .packages
 .pub-cache/
 .pub/
+.fvm
+**/ios/.symlinks
 build/
 
 # Android related

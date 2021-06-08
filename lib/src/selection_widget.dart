@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 
 import './scrollbar_props.dart';
 import './text_field_props.dart';
-import '../dropdown_search.dart';
 import 'checkbox_widget.dart';
+import '../dropdown_search2.dart';
 
 class SelectionWidget<T> extends StatefulWidget {
   final List<T> selectedValues;
