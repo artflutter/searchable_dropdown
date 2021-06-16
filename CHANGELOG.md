@@ -8,6 +8,9 @@
 
         - showSelectedItem replaced by showSelectedItems
 
+## [0.6.7]
+* sync to original
+
 ## [0.6.6]
 * more features
 
