@@ -8,6 +8,9 @@
 
         - showSelectedItem replaced by showSelectedItems
 
+## [0.6.9]
+* fix safe area
+
 ## [0.6.8]
 * readme update
 
