@@ -8,6 +8,9 @@
 
         - showSelectedItem replaced by showSelectedItems
 
+## [0.6.8]
+* readme update
+
 ## [0.6.7]
 * sync to original
 

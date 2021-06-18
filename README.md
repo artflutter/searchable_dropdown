@@ -3,6 +3,12 @@
   <br>
 </h1>
 
+<h1 align="center">
+  This is a fork of original DropdownSearch. Sometimes it takes weeks between merging PR and release so I deciced to make my own.
+  I'm tying to keep in sync and contribute to main repo.
+  <br>
+</h1>
+
 <h4 align="center">
   <a href="https://flutter.io" target="_blank">Flutter</a> simple and robust DropdownSearch with item search feature, making it possible to use an offline item list or filtering URL for easy customization.
 </h4>
@@ -13,9 +19,6 @@
          alt="Build">
   </a>
   <a href="https://pub.dev/packages/dropdown_search"><img src="https://img.shields.io/pub/v/dropdown_search"></a>
-  <a href="https://www.buymeacoffee.com/SalimDev">
-    <img src="https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&amp;style=flat">
-  </a>
 </p>
 
 <p align="center">
