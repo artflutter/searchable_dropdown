@@ -8,6 +8,9 @@
 
         - showSelectedItem replaced by showSelectedItems
 
+## [0.6.10]
+* sync to original repo
+
 ## [0.6.9]
 * fix safe area
 
