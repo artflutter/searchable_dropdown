@@ -1,6 +1,6 @@
 name: dropdown_search2
 description: Simple and robust Searchable Dropdown with item search feature, making it possible to use an offline item list or filtering URL for easy customization.
-version: 0.6.10
+version: 1.0.2
 homepage: https://github.com/artflutter
 git: https://github.com/artflutter/searchable_dropdown
 repository: https://github.com/artflutter/searchable_dropdown

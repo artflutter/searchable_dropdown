@@ -1,3 +1,9 @@
+## [1.0.2]
+* rebased on master
+
+## [1.0.1]
+* more bigfixes
+
 ## [1.0.0] - 2021.09.08
 * new feature : multiSelection mode
 * breaking changes :

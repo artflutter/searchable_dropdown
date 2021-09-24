@@ -1,8 +1,7 @@
-library dropdown_search;
+library dropdown_search2;
 
 import 'dart:async';
 
-import 'package:dropdown_search/src/selection_list_view_props.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -13,10 +12,12 @@ import 'src/popup_safearea.dart';
 import 'src/scrollbar_props.dart';
 import 'src/selection_widget.dart';
 import 'src/text_field_props.dart';
+import 'src/selection_list_view_props.dart';
 
 export 'src/popup_safearea.dart';
 export 'src/scrollbar_props.dart';
 export 'src/text_field_props.dart';
+export 'src/selection_list_view_props.dart';
 
 typedef Future<List<T>> DropdownSearchOnFind<T>(String? text);
 typedef String DropdownSearchItemAsString<T>(T? item);
@@ -315,6 +316,7 @@ class DropdownSearch<T> extends StatefulWidget {
     this.dropdownSearchTextAlignVertical,
     this.popupElevation = 8,
     this.selectionListViewProps = const SelectionListViewProps(),
+    this.stickMenuToBorder = false,
   })  : assert(!showSelectedItems || T == String || compareFn != null),
         this.searchFieldProps = searchFieldProps ?? TextFieldProps(),
         this.isMultiSelectionMode = false,
