@@ -149,7 +149,12 @@ class _PopupMenuRoute<T> extends PopupRoute<T> {
     }
 
     return CustomSingleChildLayout(
-      delegate: _PopupMenuRouteLayout(context, mediaQuery.padding, pos),
+      delegate: menuModeProps.layoutDelegate?.call(
+            context,
+            mediaQuery.padding,
+            pos,
+          ) ??
+          _PopupMenuRouteLayout(context, mediaQuery.padding, pos),
       child: capturedThemes.wrap(menu),
     );
   }

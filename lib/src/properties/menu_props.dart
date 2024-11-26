@@ -29,6 +29,11 @@ class MenuProps {
   final String? semanticLabel;
   final Color? surfaceTintColor;
   final EdgeInsets? margin;
+  final SingleChildLayoutDelegate Function(
+    BuildContext context,
+    EdgeInsets padding,
+    RelativeRect position,
+  )? layoutDelegate;
 
   const MenuProps({
     this.align,
@@ -48,5 +53,6 @@ class MenuProps {
     this.semanticLabel,
     this.surfaceTintColor,
     this.margin,
+    this.layoutDelegate,
   });
 }
