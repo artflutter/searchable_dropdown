@@ -517,15 +517,16 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
         if (widget.suffixProps.clearButtonProps.isVisible &&
             getSelectedItems.isNotEmpty)
           CustomIconButton(
-              props: widget.suffixProps.clearButtonProps,
-              onPressed: clearButtonPressed),
+            props: widget.suffixProps.clearButtonProps,
+            onPressed: widget.enabled ? clearButtonPressed : null,
+          ),
         if (widget.suffixProps.dropdownButtonProps.isVisible)
           CustomIconButton(
             props: widget.suffixProps.dropdownButtonProps,
             icon: isFocused
                 ? widget.suffixProps.dropdownButtonProps.iconOpened
                 : widget.suffixProps.dropdownButtonProps.icon,
-            onPressed: dropdownButtonPressed,
+            onPressed: widget.enabled ? dropdownButtonPressed : null,
           ),
       ],
     );
