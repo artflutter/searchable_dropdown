@@ -1,5 +1,6 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'dart:ui' as ui show TextHeightBehavior;
 
 class DropdownButtonProps extends IconButtonProps {
   final Widget iconOpened;
@@ -351,6 +352,11 @@ class DropDownDecoratorProps {
   final InputDecoration decoration;
   final TextStyle? baseStyle;
   final TextAlign? textAlign;
+  final bool softWrap;
+  final TextOverflow overflow;
+  final int? maxLines;
+  final TextWidthBasis textWidthBasis;
+  final ui.TextHeightBehavior? textHeightBehavior;
   final TextAlignVertical? textAlignVertical;
   final bool expands;
   final bool isHovering;
@@ -362,6 +368,11 @@ class DropDownDecoratorProps {
     ),
     this.baseStyle,
     this.textAlign,
+    this.softWrap = true,
+    this.overflow = TextOverflow.clip,
+    this.maxLines,
+    this.textWidthBasis = TextWidthBasis.parent,
+    this.textHeightBehavior,
     this.textAlignVertical,
     this.expands = false,
     this.isHovering = false,

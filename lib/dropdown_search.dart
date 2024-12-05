@@ -361,12 +361,17 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
     }
 
     Widget selectedItemWidget() {
+      Widget selectedItem = Text(
+        _itemAsString(getSelectedItem),
+      );
+
       if (widget.dropdownBuilder != null) {
-        return widget.dropdownBuilder!(context, getSelectedItem);
+        selectedItem = widget.dropdownBuilder!(context, getSelectedItem);
       } else if (widget.dropdownBuilderMultiSelection != null) {
-        return widget.dropdownBuilderMultiSelection!(context, getSelectedItems);
+        selectedItem =
+            widget.dropdownBuilderMultiSelection!(context, getSelectedItems);
       } else if (isMultiSelectionMode) {
-        return CustomSingleScrollView(
+        selectedItem = CustomSingleScrollView(
           scrollProps: widget.selectedItemsScrollProps ?? ScrollProps(),
           child: Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
@@ -376,10 +381,16 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
           ),
         );
       }
-      return Text(
-        _itemAsString(getSelectedItem),
-        style: _getBaseTextStyle(),
+
+      return DefaultTextStyle(
+        style: _getBaseTextStyle() ?? DefaultTextStyle.of(context).style,
         textAlign: widget.decoratorProps.textAlign,
+        softWrap: widget.decoratorProps.softWrap,
+        overflow: widget.decoratorProps.overflow,
+        maxLines: widget.decoratorProps.maxLines,
+        textWidthBasis: widget.decoratorProps.textWidthBasis,
+        textHeightBehavior: widget.decoratorProps.textHeightBehavior,
+        child: selectedItem,
       );
     }
 
@@ -387,10 +398,9 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
   }
 
   TextStyle? _getBaseTextStyle() {
-    return widget.enabled
-        ? widget.decoratorProps.baseStyle
-        : TextStyle(color: Theme.of(context).disabledColor)
-            .merge(widget.decoratorProps.baseStyle);
+    return widget.decoratorProps.baseStyle?.copyWith(
+      color: widget.enabled ? null : Theme.of(context).disabledColor,
+    );
   }
 
   Widget _formField() {
