@@ -7,6 +7,7 @@ import 'package:dropdown_search/src/properties/scroll_props.dart';
 import 'package:dropdown_search/src/utils.dart';
 import 'package:dropdown_search/src/widgets/custom_icon_button.dart';
 import 'package:dropdown_search/src/widgets/custom_inkwell.dart';
+import 'package:dropdown_search/src/widgets/hover_builder.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -429,16 +430,20 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
         return ValueListenableBuilder<bool>(
             valueListenable: _isFocused,
             builder: (context, isFocused, w) {
-              return InputDecorator(
-                baseStyle: _getBaseTextStyle(),
-                textAlign: widget.decoratorProps.textAlign,
-                textAlignVertical: widget.decoratorProps.textAlignVertical,
-                isEmpty: getSelectedItem == null,
-                isFocused: isFocused,
-                expands: widget.decoratorProps.expands,
-                isHovering: widget.decoratorProps.isHovering,
-                decoration: _manageDropdownDecoration(state),
-                child: _defaultSelectedItemWidget(),
+              return HoverBuilder(
+                builder: (context, isHovering) {
+                  return InputDecorator(
+                    baseStyle: _getBaseTextStyle(),
+                    textAlign: widget.decoratorProps.textAlign,
+                    textAlignVertical: widget.decoratorProps.textAlignVertical,
+                    isEmpty: getSelectedItem == null,
+                    isFocused: isFocused,
+                    expands: widget.decoratorProps.expands,
+                    isHovering: isHovering,
+                    decoration: _manageDropdownDecoration(state),
+                    child: _defaultSelectedItemWidget(),
+                  );
+                }
               );
             });
       },
@@ -463,16 +468,20 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
         return ValueListenableBuilder<bool>(
             valueListenable: _isFocused,
             builder: (context, isFocused, w) {
-              return InputDecorator(
-                baseStyle: _getBaseTextStyle(),
-                textAlign: widget.decoratorProps.textAlign,
-                textAlignVertical: widget.decoratorProps.textAlignVertical,
-                isEmpty: getSelectedItems.isEmpty,
-                expands: widget.decoratorProps.expands,
-                isHovering: widget.decoratorProps.isHovering,
-                isFocused: isFocused,
-                decoration: _manageDropdownDecoration(state),
-                child: _defaultSelectedItemWidget(),
+              return HoverBuilder(
+                builder: (context, isHovering) {
+                  return InputDecorator(
+                    baseStyle: _getBaseTextStyle(),
+                    textAlign: widget.decoratorProps.textAlign,
+                    textAlignVertical: widget.decoratorProps.textAlignVertical,
+                    isEmpty: getSelectedItems.isEmpty,
+                    expands: widget.decoratorProps.expands,
+                    isHovering: isHovering,
+                    isFocused: isFocused,
+                    decoration: _manageDropdownDecoration(state),
+                    child: _defaultSelectedItemWidget(),
+                  );
+                }
               );
             });
       },
@@ -507,7 +516,9 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
     dropdownButtonPressed() => _selectSearchMode();
 
     if (!widget.suffixProps.dropdownButtonProps.isVisible &&
-        !widget.suffixProps.clearButtonProps.isVisible) return null;
+        !widget.suffixProps.clearButtonProps.isVisible) {
+      return null;
+    }
 
     return Row(
       textDirection: TextDirection.ltr,
@@ -762,7 +773,9 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
       if (await widget.onBeforePopupOpening!(getSelectedItem) == false) return;
     } else if (widget.onBeforePopupOpeningMultiSelection != null) {
       if (await widget.onBeforePopupOpeningMultiSelection!(getSelectedItems) ==
-          false) return;
+          false) {
+        return;
+      }
     }
 
     _handleFocus(true);
