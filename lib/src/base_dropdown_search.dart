@@ -29,7 +29,12 @@ typedef DropdownSearchBuilder<T> = Widget Function(
 typedef DropdownSearchBuilderMultiSelection<T> = Widget Function(
     BuildContext context, List<T> selectedItems);
 typedef DropdownSearchPopupItemBuilder<T> = Widget Function(
-    BuildContext context, T item, bool isDisabled, bool isSelected);
+  BuildContext context,
+  T item,
+  bool isDisabled,
+  bool isSelected,
+  void Function(T item) onTap,
+);
 typedef DropdownSearchPopupItemEnabled<T> = bool Function(T item);
 typedef ErrorBuilder = Widget Function(
     BuildContext context, String searchEntry, dynamic exception);
@@ -50,8 +55,7 @@ typedef PositionCallback = RelativeRect Function(
     RenderBox dropdownBox, RenderBox overlay);
 typedef OnItemAdded<T> = void Function(List<T> selectedItems, T addedItem);
 typedef OnItemRemoved<T> = void Function(List<T> selectedItems, T removedItem);
-typedef ContainerBuilder = Widget Function(
-    BuildContext context, Widget child);
+typedef ContainerBuilder = Widget Function(BuildContext context, Widget child);
 
 enum PopupMode { dialog, modalBottomSheet, menu, bottomSheet, autocomplete }
 
