@@ -11,6 +11,7 @@ class DropdownSearch<T> extends BaseDropdownSearch<T> {
     super.onSelected,
     super.items,
     super.dropdownBuilder,
+    super.dropdownItemBuilder,
     super.suffixProps,
     super.clickProps,
     super.chipProps,
@@ -50,6 +51,7 @@ class DropdownSearch<T> extends BaseDropdownSearch<T> {
     super.onBeforeChange,
     super.onBeforePopupOpening,
     super.dropdownBuilder,
+    super.dropdownItemBuilder,
     //form properties
     super.onSaved,
     super.validator,

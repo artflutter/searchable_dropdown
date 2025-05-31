@@ -26,8 +26,20 @@ typedef DropdownSearchFilterFn<T> = bool Function(T item, String filter);
 typedef DropdownSearchCompareFn<T> = bool Function(T item1, T item2);
 typedef DropdownSearchBuilder<T> = Widget Function(
     BuildContext context, T? selectedItem);
+typedef DropdownSearchItemBuilder<T> = Widget Function(
+  BuildContext context,
+  T? selectedItem,
+  bool enabled,
+  VoidCallback onTap,
+);
 typedef DropdownSearchBuilderMultiSelection<T> = Widget Function(
     BuildContext context, List<T> selectedItems);
+typedef DropdownSearchItemBuilderMultiSelection<T> = Widget Function(
+  BuildContext context,
+  List<T> selectedItems,
+  bool enabled,
+  VoidCallback onTap,
+);
 typedef DropdownSearchPopupItemBuilder<T> = Widget Function(
   BuildContext context,
   T item,
@@ -79,8 +91,13 @@ abstract class BaseDropdownSearch<T> extends StatefulWidget {
   ///to customize list of items UI
   final DropdownSearchBuilder<T>? dropdownBuilder;
 
+  final DropdownSearchItemBuilder<T>? dropdownItemBuilder;
+
   ///to customize list of items UI in MultiSelection mode
   final DropdownSearchBuilderMultiSelection<T>? dropdownBuilderMultiSelection;
+
+  final DropdownSearchItemBuilderMultiSelection<T>?
+      dropdownItemBuilderMultiSelection;
 
   /// scroll props for selected item on the dropdown.
   /// example :
@@ -175,6 +192,7 @@ abstract class BaseDropdownSearch<T> extends StatefulWidget {
     this.onSelected,
     this.items,
     this.dropdownBuilder,
+    this.dropdownItemBuilder,
     this.suffixProps = const DropdownSuffixProps(),
     ClickProps? clickProps,
     this.enabled = true,
@@ -218,6 +236,7 @@ abstract class BaseDropdownSearch<T> extends StatefulWidget {
         //to correct
         isMultiSelectionMode = false,
         dropdownBuilderMultiSelection = null,
+        dropdownItemBuilderMultiSelection = null,
         validatorMultiSelection = null,
         onBeforeChangeMultiSelection = null,
         onSavedMultiSelection = null,
@@ -247,6 +266,7 @@ abstract class BaseDropdownSearch<T> extends StatefulWidget {
     BeforeChangeMultiSelection<T>? onBeforeChange,
     BeforePopupOpeningMultiSelection<T>? onBeforePopupOpening,
     DropdownSearchBuilderMultiSelection<T>? dropdownBuilder,
+    DropdownSearchItemBuilderMultiSelection<T>? dropdownItemBuilder,
     //form properties
     FormFieldSetter<List<T>>? onSaved,
     FormFieldValidator<List<T>>? validator,
@@ -282,8 +302,10 @@ abstract class BaseDropdownSearch<T> extends StatefulWidget {
         onBeforeChangeMultiSelection = onBeforeChange,
         validatorMultiSelection = validator,
         dropdownBuilderMultiSelection = dropdownBuilder,
+        dropdownItemBuilderMultiSelection = dropdownItemBuilder,
         isMultiSelectionMode = true,
         dropdownBuilder = null,
+        dropdownItemBuilder = null,
         validator = null,
         onBeforeChange = null,
         onSaved = null,
@@ -360,26 +382,31 @@ class DropdownSearchState<T> extends State<BaseDropdownSearch<T>> {
     return ValueListenableBuilder<List<T>>(
       valueListenable: _selectedItemsNotifier,
       builder: (context, data, wt) {
-        return IgnorePointer(
-          ignoring: !widget.enabled,
-          child: CustomInkWell(
-            clickProps: widget.popupProps.mode == PopupMode.autocomplete
-                ? ClickProps(
-                    canRequestFocus: false,
-                    focusColor: Colors.transparent,
-                    splashColor: Colors.transparent,
-                    mouseCursor: WidgetStateMouseCursor.textable,
-                    highlightColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                  )
-                : widget.clickProps,
-            onTap: () =>
-                widget.popupProps.mode == PopupMode.autocomplete && isFocused
-                    ? null
-                    : openDropDownSearch(),
-            child: _dropDown(),
-          ),
-        );
+        onTap() => widget.popupProps.mode == PopupMode.autocomplete && isFocused
+            ? null
+            : openDropDownSearch();
+
+        return widget.dropdownItemBuilder
+                ?.call(context, getSelectedItem, widget.enabled, onTap) ??
+            widget.dropdownItemBuilderMultiSelection
+                ?.call(context, getSelectedItems, widget.enabled, onTap) ??
+            IgnorePointer(
+              ignoring: !widget.enabled,
+              child: CustomInkWell(
+                clickProps: widget.popupProps.mode == PopupMode.autocomplete
+                    ? ClickProps(
+                        canRequestFocus: false,
+                        focusColor: Colors.transparent,
+                        splashColor: Colors.transparent,
+                        mouseCursor: WidgetStateMouseCursor.textable,
+                        highlightColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                      )
+                    : widget.clickProps,
+                onTap: onTap,
+                child: _dropDown(),
+              ),
+            );
       },
     );
   }
