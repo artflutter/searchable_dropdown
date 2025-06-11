@@ -474,7 +474,7 @@ class DropdownSearchState<T> extends State<BaseDropdownSearch<T>> {
             return CustomChip(
               label: Text(_itemAsString(e)),
               props: ChipProps(
-                onDeleted: () => removeItem(e),
+                onDeleted: widget.enabled ?  () => removeItem(e) : null,
                 shape: _uiToApply == UiToApply.cupertino
                     ? RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(18)))
