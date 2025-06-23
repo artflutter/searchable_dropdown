@@ -307,12 +307,17 @@ class DropdownSearchState<T> extends State<BaseDropdownSearch<T>> {
   void initState() {
     super.initState();
     _selectedItemsNotifier.value = List.from(widget.selectedItems);
-    _uiToApply = context.getUiToApply(widget.uiMode);
 
     if (widget.popupProps.mode == PopupMode.autocomplete) {
       HardwareKeyboard.instance
           .addHandler(_handleAutoCompleteBackPressKeyPress);
     }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _uiToApply = context.getUiToApply(widget.uiMode);
   }
 
   bool _handleAutoCompleteBackPressKeyPress(KeyEvent event) {
