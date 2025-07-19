@@ -183,6 +183,9 @@ abstract class BaseDropdownSearch<T> extends StatefulWidget {
 
   final Object? groupId;
 
+  /// Called when the focus state changes.
+  final void Function(bool)? onFocusChange;
+
   BaseDropdownSearch({
     super.key,
     this.groupId,
@@ -209,6 +212,7 @@ abstract class BaseDropdownSearch<T> extends StatefulWidget {
     this.chipProps,
     DropDownDecoratorProps? decoratorProps,
     this.textProps = const TextProps(),
+    this.onFocusChange,
   })  : assert(
           T == String || T == int || T == double || compareFn != null,
           '`compareFn` is required',
@@ -265,6 +269,7 @@ abstract class BaseDropdownSearch<T> extends StatefulWidget {
     ValueChanged<List<T>>? onSelected,
     BeforeChangeMultiSelection<T>? onBeforeChange,
     BeforePopupOpeningMultiSelection<T>? onBeforePopupOpening,
+    this.onFocusChange,
     DropdownSearchBuilderMultiSelection<T>? dropdownBuilder,
     DropdownSearchItemBuilderMultiSelection<T>? dropdownItemBuilder,
     //form properties
@@ -339,6 +344,10 @@ class DropdownSearchState<T> extends State<BaseDropdownSearch<T>> {
       HardwareKeyboard.instance
           .addHandler(_handleAutoCompleteBackPressKeyPress);
     }
+
+    _isFocused.addListener(() {
+      widget.onFocusChange?.call(_isFocused.value);
+    });
   }
 
   bool _handleAutoCompleteBackPressKeyPress(KeyEvent event) {
@@ -415,6 +424,7 @@ class DropdownSearchState<T> extends State<BaseDropdownSearch<T>> {
   void dispose() {
     closeDropDownSearch();
     autoCompleteFocusNode.dispose();
+    _isFocused.dispose();
     HardwareKeyboard.instance
         .removeHandler(_handleAutoCompleteBackPressKeyPress);
     super.dispose();
