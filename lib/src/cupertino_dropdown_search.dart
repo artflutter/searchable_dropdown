@@ -21,6 +21,7 @@ class CupertinoDropdownSearch<T> extends BaseDropdownSearch<T> {
     super.compareFn,
     super.onBeforeChange,
     super.onBeforePopupOpening,
+    super.onFocusChange,
     //form properties
     super.onSaved,
     super.validator,
@@ -50,6 +51,7 @@ class CupertinoDropdownSearch<T> extends BaseDropdownSearch<T> {
     super.onSelected,
     super.onBeforeChange,
     super.onBeforePopupOpening,
+    super.onFocusChange,
     super.dropdownBuilder,
     //form properties
     super.onSaved,
