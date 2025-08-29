@@ -72,6 +72,8 @@ class TextFieldProps extends BaseTextFieldProps {
   final bool onTapAlwaysCalled;
   final Object groupId;
   final TapRegionUpCallback? onTapUpOutside;
+  final bool? selectAllOnFocus;
+  final List<Locale>? hintLocales;
 
   const TextFieldProps({
     this.groupId = EditableText,
@@ -137,15 +139,15 @@ class TextFieldProps extends BaseTextFieldProps {
     this.ignorePointers,
     this.magnifierConfiguration,
     this.onTapOutside,
-    this.stylusHandwritingEnabled =
-        EditableText.defaultStylusHandwritingEnabled,
+    this.stylusHandwritingEnabled = EditableText.defaultStylusHandwritingEnabled,
     this.spellCheckConfiguration,
     this.undoController,
     this.onTapUpOutside,
+    this.hintLocales,
+    this.selectAllOnFocus,
   });
 
-  static Widget _defaultContextMenuBuilder(
-      BuildContext context, EditableTextState editableTextState) {
+  static Widget _defaultContextMenuBuilder(BuildContext context, EditableTextState editableTextState) {
     return AdaptiveTextSelectionToolbar.editableText(
       editableTextState: editableTextState,
     );

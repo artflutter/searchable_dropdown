@@ -90,6 +90,7 @@ class CupertinoTextFieldProps extends BaseTextFieldProps {
   final OverlayVisibilityMode prefixMode;
   final Widget? suffix;
   final OverlayVisibilityMode suffixMode;
+  final bool? selectAllOnFocus;
 
   const CupertinoTextFieldProps({
     this.groupId = EditableText,
@@ -165,6 +166,7 @@ class CupertinoTextFieldProps extends BaseTextFieldProps {
         EditableText.defaultStylusHandwritingEnabled,
     this.onTapUpOutside,
     this.crossAxisAlignment = CrossAxisAlignment.center,
+    this.selectAllOnFocus,
   });
 
   static Widget _defaultContextMenuBuilder(

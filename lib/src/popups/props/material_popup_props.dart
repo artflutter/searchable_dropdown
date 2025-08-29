@@ -87,6 +87,7 @@ class MultiSelectionPopupProps<T> extends BasePopupProps<T> {
     super.interceptCallBacks,
     super.infiniteScrollProps,
     super.onItemsLoaded,
+    super.onDisplayed,
     //multi selection props
     super.onItemAdded,
     super.onItemRemoved,
@@ -128,6 +129,7 @@ class MultiSelectionPopupProps<T> extends BasePopupProps<T> {
     super.interceptCallBacks,
     super.infiniteScrollProps,
     super.onItemsLoaded,
+    super.onDisplayed,
     //multi selection props
     super.onItemAdded,
     super.onItemRemoved,
@@ -165,6 +167,7 @@ class MultiSelectionPopupProps<T> extends BasePopupProps<T> {
     super.interceptCallBacks,
     super.infiniteScrollProps,
     super.onItemsLoaded,
+    super.onDisplayed,
     //multi selection props
     super.onItemAdded,
     super.onItemRemoved,
@@ -202,6 +205,7 @@ class MultiSelectionPopupProps<T> extends BasePopupProps<T> {
     super.interceptCallBacks,
     super.infiniteScrollProps,
     super.onItemsLoaded,
+    super.onDisplayed,
     //multi selection props
     super.onItemAdded,
     super.onItemRemoved,
@@ -290,6 +294,7 @@ class PopupProps<T> extends BasePopupProps<T> {
     super.interceptCallBacks,
     super.infiniteScrollProps,
     super.onItemsLoaded,
+    super.onDisplayed,
   })  : bottomSheetProps = const BottomSheetProps(),
         dialogProps = const DialogProps(),
         menuProps = const MenuProps(),
@@ -325,6 +330,7 @@ class PopupProps<T> extends BasePopupProps<T> {
     super.interceptCallBacks,
     super.infiniteScrollProps,
     super.onItemsLoaded,
+    super.onDisplayed,
   })  : bottomSheetProps = const BottomSheetProps(),
         menuProps = const MenuProps(),
         autoCompleteProps = const AutocompleteProps(),
@@ -356,6 +362,7 @@ class PopupProps<T> extends BasePopupProps<T> {
     super.interceptCallBacks,
     super.infiniteScrollProps,
     super.onItemsLoaded,
+    super.onDisplayed,
   })  : menuProps = const MenuProps(),
         autoCompleteProps = const AutocompleteProps(),
         dialogProps = const DialogProps(),
@@ -389,6 +396,7 @@ class PopupProps<T> extends BasePopupProps<T> {
     super.interceptCallBacks,
     super.infiniteScrollProps,
     super.onItemsLoaded,
+    super.onDisplayed,
   })  : menuProps = const MenuProps(),
         autoCompleteProps = const AutocompleteProps(),
         modalBottomSheetProps = const ModalBottomSheetProps(),

@@ -76,6 +76,8 @@ class CustomTextFields extends StatelessWidget {
       undoController: props.undoController,
       spellCheckConfiguration: props.spellCheckConfiguration,
       onTapUpOutside: props.onTapUpOutside,
+      selectAllOnFocus: props.selectAllOnFocus,
+      hintLocales: props.hintLocales,
     );
   }
 }

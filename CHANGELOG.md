@@ -87,6 +87,8 @@
   * add possibility to reload item using `myGlobalKey.currentState?.reloadItems(String filter)` or `myGlobalKey.currentState?.loadMoreItems(String filter, int skip)`
   * add `textProps` to have an ability to pass default text props through the context to `selectedItem` 
   * add new property for TextFieldProps
+  * add the ability to listen to focus changes using `onFocusChange`
+  * add new callbacks `onBeforeClear` and `onClear` to handle dropdown clear button action
   
 * #### Breaking changes
   * change `onChanged` to `onSelected`
